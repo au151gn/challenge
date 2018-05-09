@@ -2,7 +2,6 @@ package com.ey.challenge.gt;
 
 import com.ey.challenge.gt.counter.MaxVisitFinder;
 import com.ey.challenge.gt.model.VisitPeriod;
-import com.ey.challenge.gt.model.VisitsAtTime;
 import com.ey.challenge.gt.model.VisitsWithinPeriod;
 import com.ey.challenge.gt.reader.VisitsFileReader;
 
