@@ -1,0 +1,20 @@
+group 'com.ey.challenge.gt'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.7'
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+test {
+    scanForTestClasses = false
+    include "com/ey/challenge/gt/MainAppTest.class"
+}
