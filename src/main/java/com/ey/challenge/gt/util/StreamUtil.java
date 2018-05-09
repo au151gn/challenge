@@ -9,7 +9,9 @@ import java.util.stream.Stream;
  * A helper class to manipulate streams.
  * @author Paweł Ryszawa
  */
-public class StreamUtil {
+public final class StreamUtil {
+
+    private StreamUtil() { } // This is a helper class and should not be instantiated.
 
     /**
      * This method retrieves the head and the tail of a stream. Since this is not Java native method,
