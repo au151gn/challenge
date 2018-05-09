@@ -9,6 +9,7 @@ import java.util.stream.Stream;
  * type items into a stream of destination generic type items.
  * @param <D> Destination generic type.
  * @param <S> Source generic type.
+ * @author Paweł Ryszawa
  */
 public abstract class StreamConverter<D, S> implements Converter<Stream<D>, Stream<S>> {
 

@@ -1,7 +1,5 @@
 package com.ey.challenge.gt.reader;
 
-import com.ey.challenge.gt.Converter;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -10,6 +8,7 @@ import java.util.stream.Stream;
 
 /**
  * This class converts a file path into a stream of raw data.
+ * @author Paweł Ryszawa
  */
 public class FileReader extends Reader {
 

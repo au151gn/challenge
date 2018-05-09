@@ -10,6 +10,7 @@ import java.util.stream.Stream;
 /**
  * This is an abstract class of readers that convert the name of a resource/file/etc. into
  * a stream of significant (i.e. non-null) visit periods.
+ * @author Paweł Ryszawa
  */
 public abstract class VisitsReader implements Converter<Stream<VisitPeriod>, String> {
 

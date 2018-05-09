@@ -4,8 +4,9 @@ import java.util.Optional;
 import java.util.stream.Stream;
 
 /**
- * A class representing head element toghether with a tail as a stream.
+ * A class representing head element together with a tail as a stream.
  * @param <T> Generic type of the underlying elements.
+ * @author Paweł Ryszawa
  */
 public class HeadAndTail<T> {
 
@@ -43,7 +44,7 @@ public class HeadAndTail<T> {
 
     /**
      * Returns true if this represents an empty head-and-tail.
-     * @return
+     * @return true, if empty
      */
     public boolean isEmpty() {
         return !head.isPresent();

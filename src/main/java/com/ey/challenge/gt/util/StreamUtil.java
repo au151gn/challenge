@@ -7,6 +7,7 @@ import java.util.stream.Stream;
 
 /**
  * A helper class to manipulate streams.
+ * @author Paweł Ryszawa
  */
 public class StreamUtil {
 
@@ -20,7 +21,7 @@ public class StreamUtil {
     public static <T> HeadAndTail<T> consumeFirst(Stream<T> stream) {
         List<T> lst = stream.collect(Collectors.toList());
         Optional<T> head = lst.size() > 0 ? Optional.of(lst.remove(0)) : Optional.empty();
-        return new HeadAndTail<T>(head, lst.stream());
+        return new HeadAndTail<>(head, lst.stream());
     }
 
 }

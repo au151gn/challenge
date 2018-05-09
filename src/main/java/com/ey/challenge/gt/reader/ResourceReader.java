@@ -1,7 +1,5 @@
 package com.ey.challenge.gt.reader;
 
-import com.ey.challenge.gt.Converter;
-
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;

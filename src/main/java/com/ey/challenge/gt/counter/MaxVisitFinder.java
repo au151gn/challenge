@@ -10,6 +10,7 @@ import java.util.stream.Stream;
 
 /**
  * Finds the point of time with the highest number of visits.
+ * @author Paweł Ryszawa
  */
 public class MaxVisitFinder implements Converter<Optional<VisitsAtTime>, Stream<VisitPeriod>> {
 
