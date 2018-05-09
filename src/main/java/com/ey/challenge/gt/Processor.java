@@ -4,6 +4,7 @@ package com.ey.challenge.gt;
  * A general interface for classes transforming its input into some output.
  * @param <D> Output generic type.
  * @param <S> Input generic type.
+ * @author Paweł Ryszawa
  */
 public interface Processor<D, S> {
 
