@@ -1,6 +1,6 @@
 package com.ey.challenge.gt.parser;
 
-import com.ey.challenge.gt.Converter;
+import com.ey.challenge.gt.Processor;
 import com.ey.challenge.gt.model.VisitPeriod;
 import org.apache.commons.lang3.StringUtils;
 
@@ -13,7 +13,7 @@ import java.util.stream.Stream;
  * A class converting an input data line into a model instance.
  * @author Paweł Ryszawa
  */
-public class TextToVisitConverterImpl implements Converter<VisitPeriod, String> {
+public class TextToVisitProcessorImpl implements Processor<VisitPeriod, String> {
 
     private static final String REGEX_TWO_DATES = "(\\d{2}:\\d{2}),(\\d{2}:\\d{2})";
 
@@ -26,7 +26,7 @@ public class TextToVisitConverterImpl implements Converter<VisitPeriod, String> 
      * @return VisitPeriod instance.
      */
     @Override
-    public VisitPeriod convert(String line) {
+    public VisitPeriod process(String line) {
         if (StringUtils.isEmpty(line)) {
             return null;
         }

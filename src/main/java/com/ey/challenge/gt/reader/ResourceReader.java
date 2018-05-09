@@ -15,7 +15,7 @@ public class ResourceReader extends Reader {
      * {@inheritDoc}
      */
     @Override
-    public Stream<String> convert(String src) {
+    public Stream<String> process(String src) {
         InputStream inp = ClassLoader.getSystemResourceAsStream(src);
         BufferedReader br = new BufferedReader(new InputStreamReader(inp));
         return br.lines();

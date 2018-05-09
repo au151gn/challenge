@@ -3,7 +3,7 @@ package com.ey.challenge.gt.counter;
 import com.ey.challenge.gt.util.HeadAndTail;
 import com.ey.challenge.gt.model.VisitPeriod;
 import com.ey.challenge.gt.model.VisitsAtTime;
-import com.ey.challenge.gt.Converter;
+import com.ey.challenge.gt.Processor;
 import com.ey.challenge.gt.util.StreamUtil;
 
 import java.time.LocalTime;
@@ -15,17 +15,17 @@ import java.util.stream.Stream;
  * the significant points of time.
  * @author Paweł Ryszawa
  */
-public class VisitsCounter implements Converter<Stream<VisitsAtTime>, Stream<VisitPeriod>> {
+public class VisitsCounter implements Processor<Stream<VisitsAtTime>, Stream<VisitPeriod>> {
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public Stream<VisitsAtTime> convert(Stream<VisitPeriod> src) {
-        return convert(Stream.of(), src);
+    public Stream<VisitsAtTime> process(Stream<VisitPeriod> src) {
+        return process(Stream.of(), src);
     }
 
-    private Stream<VisitsAtTime> convert(Stream<VisitsAtTime> dst, Stream<VisitPeriod> src) {
+    private Stream<VisitsAtTime> process(Stream<VisitsAtTime> dst, Stream<VisitPeriod> src) {
         HeadAndTail<VisitPeriod> headAndTail = StreamUtil.consumeFirst(src);
         if (headAndTail.isEmpty()) {
             return dst; // This is the end of recursion.
@@ -38,7 +38,7 @@ public class VisitsCounter implements Converter<Stream<VisitsAtTime>, Stream<Vis
                         : new VisitsAtTime(vt.getTime(), vt.getNoOfVisits() + 1)
         );
         Stream<VisitPeriod> tail = headAndTail.getTail();
-        return convert(compact(newDst), tail);
+        return process(compact(newDst), tail);
     }
 
     private Stream<VisitsAtTime> insertTime(Stream<VisitsAtTime> stream, LocalTime time, int lastNoOfVisits) {

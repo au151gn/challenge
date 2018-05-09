@@ -1,6 +1,6 @@
 package com.ey.challenge.gt.reader;
 
-import com.ey.challenge.gt.Converter;
+import com.ey.challenge.gt.Processor;
 
 import java.util.stream.Stream;
 
@@ -9,5 +9,5 @@ import java.util.stream.Stream;
  * resource/file/etc. and return its content as a stream of lines.
  * @author Paweł Ryszawa
  */
-public abstract class Reader implements Converter<Stream<String>, String> {
+public abstract class Reader implements Processor<Stream<String>, String> {
 }

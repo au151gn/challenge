@@ -1,20 +1,20 @@
 package com.ey.challenge.gt.reader;
 
-import com.ey.challenge.gt.Converter;
+import com.ey.challenge.gt.Processor;
 import com.ey.challenge.gt.model.VisitPeriod;
-import com.ey.challenge.gt.parser.StreamConverter;
-import com.ey.challenge.gt.parser.StreamTextToVisitConverterImpl;
+import com.ey.challenge.gt.parser.StreamProcessor;
+import com.ey.challenge.gt.parser.StreamTextToVisitProcessorImpl;
 
 import java.util.stream.Stream;
 
 /**
- * This is an abstract class of readers that convert the name of a resource/file/etc. into
+ * This is an abstract class of readers that process the name of a resource/file/etc. into
  * a stream of significant (i.e. non-null) visit periods.
  * @author Paweł Ryszawa
  */
-public abstract class VisitsReader implements Converter<Stream<VisitPeriod>, String> {
+public abstract class VisitsReader implements Processor<Stream<VisitPeriod>, String> {
 
-    private StreamConverter<VisitPeriod, String> streamConverter = new StreamTextToVisitConverterImpl();
+    private StreamProcessor<VisitPeriod, String> streamProcessor = new StreamTextToVisitProcessorImpl();
 
     /**
      * The concrete class should return here a reader that gets the name of a resource/file/etc.
@@ -27,9 +27,9 @@ public abstract class VisitsReader implements Converter<Stream<VisitPeriod>, Str
      * {@inheritDoc}
      */
     @Override
-    public Stream<VisitPeriod> convert(String src) {
-        Stream<String> rawData = getReader().convert(src);
-        return streamConverter.convert(rawData).filter(vp -> vp != null);
+    public Stream<VisitPeriod> process(String src) {
+        Stream<String> rawData = getReader().process(src);
+        return streamProcessor.process(rawData).filter(vp -> vp != null);
     }
 
 }

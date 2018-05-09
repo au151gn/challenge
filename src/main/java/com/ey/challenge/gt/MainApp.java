@@ -15,8 +15,8 @@ import java.util.stream.Stream;
 public class MainApp {
 
     private static void doFromVisitPeriods(Stream<VisitPeriod> vps) {
-        Converter<Optional<VisitsAtTime>, Stream<VisitPeriod>> finder = new MaxVisitFinder();
-        Optional<VisitsAtTime> vtMax = finder.convert(vps);
+        Processor<Optional<VisitsAtTime>, Stream<VisitPeriod>> finder = new MaxVisitFinder();
+        Optional<VisitsAtTime> vtMax = finder.process(vps);
         if (vtMax.isPresent()) {
             System.out.print(vtMax.get());
         }
@@ -29,8 +29,8 @@ public class MainApp {
     public static void main(String args[]) {
         if (args.length == 1) {
             String fileName = args[0];
-            Converter<Stream<VisitPeriod>, String> reader = new VisitsFileReader();
-            doFromVisitPeriods(reader.convert(fileName));
+            Processor<Stream<VisitPeriod>, String> reader = new VisitsFileReader();
+            doFromVisitPeriods(reader.process(fileName));
         } else {
             System.err.println("Please provide the input file path and name as a single parameter.");
         }

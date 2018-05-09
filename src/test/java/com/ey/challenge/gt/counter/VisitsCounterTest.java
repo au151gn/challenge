@@ -19,7 +19,7 @@ public class VisitsCounterTest {
     public void testOneVisitor() {
         VisitsCounter counter = new VisitsCounter();
         Stream<VisitPeriod> src = Stream.of(new VisitPeriod(LocalTime.of(11,35), LocalTime.of(12,01)));
-        Stream<VisitsAtTime> dst = counter.convert(src);
+        Stream<VisitsAtTime> dst = counter.process(src);
         HeadAndTail<VisitsAtTime> headAndTail = StreamUtil.consumeFirst(dst);
         assertTrue(headAndTail.getHead().isPresent());
         assertEquals(new VisitsAtTime(LocalTime.of(11, 35), 1), headAndTail.getHead().get());
@@ -36,7 +36,7 @@ public class VisitsCounterTest {
                 new VisitPeriod(LocalTime.of(12,30), LocalTime.of(13,59)),
                 new VisitPeriod(LocalTime.of(11,35), LocalTime.of(12,01))
         );
-        List<VisitsAtTime> dst = counter.convert(src).collect(Collectors.toList());
+        List<VisitsAtTime> dst = counter.process(src).collect(Collectors.toList());
         assertEquals(4, dst.size());
         assertEquals(new VisitsAtTime(LocalTime.of(11, 35), 1), dst.get(0));
         assertEquals(new VisitsAtTime(LocalTime.of(12, 02), 0), dst.get(1));
@@ -51,7 +51,7 @@ public class VisitsCounterTest {
                 new VisitPeriod(LocalTime.of(11,35), LocalTime.of(13,59)),
                 new VisitPeriod(LocalTime.of(12,01), LocalTime.of(12,30))
         );
-        List<VisitsAtTime> dst = counter.convert(src).collect(Collectors.toList());
+        List<VisitsAtTime> dst = counter.process(src).collect(Collectors.toList());
         assertEquals(4, dst.size());
         assertEquals(new VisitsAtTime(LocalTime.of(11, 35), 1), dst.get(0));
         assertEquals(new VisitsAtTime(LocalTime.of(12, 01), 2), dst.get(1));
@@ -66,7 +66,7 @@ public class VisitsCounterTest {
                 new VisitPeriod(LocalTime.of(11,00), LocalTime.of(11,59)),
                 new VisitPeriod(LocalTime.of(12,00), LocalTime.of(12,59))
         );
-        List<VisitsAtTime> dst = counter.convert(src).collect(Collectors.toList());
+        List<VisitsAtTime> dst = counter.process(src).collect(Collectors.toList());
         assertEquals(2, dst.size());
         assertEquals(new VisitsAtTime(LocalTime.of(11, 00), 1), dst.get(0));
         assertEquals(new VisitsAtTime(LocalTime.of(13, 00), 0), dst.get(1));
@@ -79,7 +79,7 @@ public class VisitsCounterTest {
                 new VisitPeriod(LocalTime.of(11,00), LocalTime.of(11,59)),
                 new VisitPeriod(LocalTime.of(12,01), LocalTime.of(12,59))
         );
-        List<VisitsAtTime> dst = counter.convert(src).collect(Collectors.toList());
+        List<VisitsAtTime> dst = counter.process(src).collect(Collectors.toList());
         assertEquals(4, dst.size());
         assertEquals(new VisitsAtTime(LocalTime.of(11, 00), 1), dst.get(0));
         assertEquals(new VisitsAtTime(LocalTime.of(12, 00), 0), dst.get(1));
@@ -95,7 +95,7 @@ public class VisitsCounterTest {
                 new VisitPeriod(LocalTime.of(12,00), LocalTime.of(12,30)),
                 new VisitPeriod(LocalTime.of(12,31), LocalTime.of(13,00))
         );
-        List<VisitsAtTime> dst = counter.convert(src).collect(Collectors.toList());
+        List<VisitsAtTime> dst = counter.process(src).collect(Collectors.toList());
         assertEquals(4, dst.size());
         assertEquals(new VisitsAtTime(LocalTime.of(11, 35), 1), dst.get(0));
         assertEquals(new VisitsAtTime(LocalTime.of(12, 00), 2), dst.get(1));
@@ -110,7 +110,7 @@ public class VisitsCounterTest {
                 new VisitPeriod(LocalTime.of(11,00), LocalTime.of(11,30)),
                 new VisitPeriod(LocalTime.of(11,30), LocalTime.of(11,59))
         );
-        List<VisitsAtTime> dst = counter.convert(src).collect(Collectors.toList());
+        List<VisitsAtTime> dst = counter.process(src).collect(Collectors.toList());
         assertEquals(4, dst.size());
         assertEquals(new VisitsAtTime(LocalTime.of(11, 00), 1), dst.get(0));
         assertEquals(new VisitsAtTime(LocalTime.of(11, 30), 2), dst.get(1));
@@ -125,7 +125,7 @@ public class VisitsCounterTest {
                 new VisitPeriod(LocalTime.of(11,00), LocalTime.of(11,30)),
                 new VisitPeriod(LocalTime.of(11,00), LocalTime.of(11,30))
         );
-        List<VisitsAtTime> dst = counter.convert(src).collect(Collectors.toList());
+        List<VisitsAtTime> dst = counter.process(src).collect(Collectors.toList());
         assertEquals(2, dst.size());
         assertEquals(new VisitsAtTime(LocalTime.of(11, 00), 2), dst.get(0));
         assertEquals(new VisitsAtTime(LocalTime.of(11, 31), 0), dst.get(1));
@@ -138,7 +138,7 @@ public class VisitsCounterTest {
                 new VisitPeriod(LocalTime.of(11,00), LocalTime.of(11,30)),
                 new VisitPeriod(LocalTime.of(11,00), LocalTime.of(12,00))
         );
-        List<VisitsAtTime> dst = counter.convert(src).collect(Collectors.toList());
+        List<VisitsAtTime> dst = counter.process(src).collect(Collectors.toList());
         assertEquals(3, dst.size());
         assertEquals(new VisitsAtTime(LocalTime.of(11, 00), 2), dst.get(0));
         assertEquals(new VisitsAtTime(LocalTime.of(11, 31), 1), dst.get(1));
@@ -152,7 +152,7 @@ public class VisitsCounterTest {
                 new VisitPeriod(LocalTime.of(11,00), LocalTime.of(12,00)),
                 new VisitPeriod(LocalTime.of(11,30), LocalTime.of(12,00))
         );
-        List<VisitsAtTime> dst = counter.convert(src).collect(Collectors.toList());
+        List<VisitsAtTime> dst = counter.process(src).collect(Collectors.toList());
         assertEquals(3, dst.size());
         assertEquals(new VisitsAtTime(LocalTime.of(11, 00), 1), dst.get(0));
         assertEquals(new VisitsAtTime(LocalTime.of(11, 30), 2), dst.get(1));

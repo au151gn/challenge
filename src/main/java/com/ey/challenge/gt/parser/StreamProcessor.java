@@ -1,6 +1,6 @@
 package com.ey.challenge.gt.parser;
 
-import com.ey.challenge.gt.Converter;
+import com.ey.challenge.gt.Processor;
 
 import java.util.stream.Stream;
 
@@ -11,14 +11,17 @@ import java.util.stream.Stream;
  * @param <S> Source generic type.
  * @author Paweł Ryszawa
  */
-public abstract class StreamConverter<D, S> implements Converter<Stream<D>, Stream<S>> {
+public abstract class StreamProcessor<D, S> implements Processor<Stream<D>, Stream<S>> {
 
-    protected abstract Converter<D, S> getConverter();
+    protected abstract Processor<D, S> getProcessor();
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public Stream<D> convert(Stream<S> src) {
-        final Converter<D, S> converter = getConverter();
-        return src.map(item -> converter.convert(item));
+    public Stream<D> process(Stream<S> src) {
+        final Processor<D, S> processor = getProcessor();
+        return src.map(item -> processor.process(item));
     }
 
 }

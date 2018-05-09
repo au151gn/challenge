@@ -1,6 +1,6 @@
 package com.ey.challenge.gt.counter;
 
-import com.ey.challenge.gt.Converter;
+import com.ey.challenge.gt.Processor;
 import com.ey.challenge.gt.model.VisitsAtTime;
 import com.ey.challenge.gt.model.VisitsWithinPeriod;
 import com.ey.challenge.gt.util.HeadAndTail;
@@ -14,20 +14,20 @@ import java.util.stream.Stream;
  * into a stream of those numbers paired with corresponding periods.
  * @author Paweł Ryszawa
  */
-public class VisitsToPeriodsConverterImpl implements Converter<Stream<VisitsWithinPeriod>, Stream<VisitsAtTime>> {
+public class VisitsToPeriodsProcessorImpl implements Processor<Stream<VisitsWithinPeriod>, Stream<VisitsAtTime>> {
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public Stream<VisitsWithinPeriod> convert(Stream<VisitsAtTime> src) {
-        return convert(Optional.empty(), src);
+    public Stream<VisitsWithinPeriod> process(Stream<VisitsAtTime> src) {
+        return process(Optional.empty(), src);
     }
 
-    private Stream<VisitsWithinPeriod> convert(Optional<VisitsAtTime> lastVt, Stream<VisitsAtTime> src) {
+    private Stream<VisitsWithinPeriod> process(Optional<VisitsAtTime> lastVt, Stream<VisitsAtTime> src) {
         HeadAndTail<VisitsAtTime> headAndTail = StreamUtil.consumeFirst(src);
         if (!lastVt.isPresent()) {
-            return convert(headAndTail.getHead(), headAndTail.getTail());
+            return process(headAndTail.getHead(), headAndTail.getTail());
         } else if (headAndTail.isEmpty()) {
             return Stream.of();
         } else {
@@ -37,7 +37,7 @@ public class VisitsToPeriodsConverterImpl implements Converter<Stream<VisitsWith
                             headAndTail.getHead().get().getTime().minusMinutes(1),
                             lastVt.get().getNoOfVisits()
                     )),
-                    convert(headAndTail.getHead(), headAndTail.getTail())
+                    process(headAndTail.getHead(), headAndTail.getTail())
             );
         }
     }
