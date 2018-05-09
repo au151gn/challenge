@@ -3,6 +3,7 @@ package com.ey.challenge.gt;
 import com.ey.challenge.gt.counter.MaxVisitFinder;
 import com.ey.challenge.gt.model.VisitPeriod;
 import com.ey.challenge.gt.model.VisitsAtTime;
+import com.ey.challenge.gt.model.VisitsWithinPeriod;
 import com.ey.challenge.gt.reader.VisitsFileReader;
 
 import java.util.Optional;
@@ -15,10 +16,10 @@ import java.util.stream.Stream;
 public class MainApp {
 
     private static void doFromVisitPeriods(Stream<VisitPeriod> vps) {
-        Processor<Optional<VisitsAtTime>, Stream<VisitPeriod>> finder = new MaxVisitFinder();
-        Optional<VisitsAtTime> vtMax = finder.process(vps);
-        if (vtMax.isPresent()) {
-            System.out.print(vtMax.get());
+        Processor<Optional<VisitsWithinPeriod>, Stream<VisitPeriod>> finder = new MaxVisitFinder();
+        Optional<VisitsWithinPeriod> vpMax = finder.process(vps);
+        if (vpMax.isPresent()) {
+            System.out.print(vpMax.get());
         }
     }
 
